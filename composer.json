@@ -1,0 +1,17 @@
+{
+	"name": "openthc/dump",
+	"description": "OpenTHC Data Dumper Tool",
+	"license": "GPL-3.0-only",
+	"autoload": {
+		"psr-4": {
+			"App\\": "./lib"
+		}
+	},
+	"require": {
+		"php": ">=7.2.0",
+		"edoceo/radix": "dev-master",
+		"league/oauth2-client": "2.4.1",
+		"openthc/common": "dev-master",
+		"openthc/cre-adapter": "dev-master"
+	}
+}
