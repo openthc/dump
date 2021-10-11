@@ -1,5 +1,9 @@
 <?php
 /**
+ * (c) 2017 OpenTHC, Inc.
+ * This file is part of OpenTHC API released under MIT License
+ * SPDX-License-Identifier: GPL-3.0-only
+ *
  * Main Controller for dump.openthc
  */
 
@@ -31,7 +35,7 @@ $app->group('/auth', function() {
 })->add('OpenTHC\Middleware\Session');
 
 $app->get('/home', 'App\Controller\Home')->add('OpenTHC\Middleware\Session');
-$app->get('/data', 'App\Controller\Data')->add('OpenTHC\Middleware\Session');
+//$app->get('/data', 'App\Controller\Data')->add('OpenTHC\Middleware\Session');
 //$app->get('/ajax', 'App\Controller\Ajax')->add('OpenTHC\Middleware\Session');
 
 
