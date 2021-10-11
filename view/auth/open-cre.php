@@ -7,16 +7,19 @@
  * Authenticate to CRE
  */
 
-$cre_stub = $_GET['cre'];
+$data['cre_code'] = $_GET['cre'];
 
 ?>
 
-<form autocomplete="x" method="post">
-<div class="auth-wrap">
 <div class="card">
 
-	<h1 class="card-header"><?= h($data['Page']['title']) ?></h1>
-	<div class="card-body">
+<h2 class="card-header">CRE Direct Connect</h2>
+<div class="card-body">
+
+<p>
+You can connect directly to the compliance engine to download all your data, no account is necessary.
+Select the correct engine for your region and complete the necessary information.
+</p>
 
 <div class="form-group">
 	<label>CRE:</label>
@@ -100,11 +103,10 @@ if (!empty($data['google_recaptcha_v2'])) {
 	</div>
 
 	<div class="card-footer">
-		<button class="btn btn-lg btn-outline-primary" name="a" type="submit" value="auth-web">Connect</button>
+		<button class="btn btn-primary" name="a" type="submit" value="auth-cre">Connect</button>
 	</div>
 </div>
-</div>
-</form>
+
 
 
 <script>
@@ -123,6 +125,7 @@ $(function() {
 		$(sel).show();
 
 	});
+	$('#cre').change();
 
 	$('.company-autocomplete').autocomplete({
 		source: 'https://<?= $data['OpenTHC']['dir']['hostname'] ?>/api/autocomplete/company',
