@@ -46,6 +46,7 @@ class Open extends \OpenTHC\Controller\Auth\oAuth2
 
 		}
 
+		$data['cre_list'] = \OpenTHC\CRE::getEngineList();
 		$data['pipe_token'] = $_GET['pipe-token'];
 
 		return $RES->write( $this->render('auth/open', $data) );
