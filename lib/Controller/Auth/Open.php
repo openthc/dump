@@ -85,7 +85,8 @@ class Open extends \OpenTHC\Controller\Auth\oAuth2
 
 		$_SESSION['cre'] = $cre;
 		$_SESSION['cre-auth'] = array();
-		$_SESSION['sql-name'] = null;
+		$_SESSION['sql-file'] = null;
+		$_SESSION['sql-hash'] = null;
 
 		switch ($cre['engine']) {
 		case 'biotrack':
@@ -103,7 +104,7 @@ class Open extends \OpenTHC\Controller\Auth\oAuth2
 			return $RES;
 		}
 
-		return $RES->withRedirect('/data');
+		return $RES->withRedirect('/home');
 
 	}
 
@@ -153,7 +154,8 @@ class Open extends \OpenTHC\Controller\Auth\oAuth2
 			), 403);
 		}
 
-		// $_SESSION['sql-name'] = sprintf('openthc_bong_%s', md5($_SESSION['cre-auth']['license']));
+		$_SESSION['sql-hash'] = md5(sprintf('%s:%s', $_ENV['license'], $_ENV['license-key']));
+		$_SESSION['sql-file'] = sprintf('%s/%s.sqlite', APP_ROOT, $_SESSION['sql-hash']);
 
 		return $RES->withJSON([
 			'data' => session_id(),
