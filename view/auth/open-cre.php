@@ -7,8 +7,6 @@
  * Authenticate to CRE
  */
 
-$data['cre_code'] = $_GET['cre'];
-
 ?>
 
 <div class="card">
@@ -42,42 +40,42 @@ Select the correct engine for your region and complete the necessary information
 	<label>Service API Key:</label>
 	<input autocomplete="x"
 		class="form-control" name="service-key"
-		placeholder="METRC" value="<?= h($data['cre_service_key']) ?>">
+		placeholder="METRC" value="<?= h($data['service-key']) ?>">
 </div>
 
-<div class="form-group" data-biotrack="true" data-leafdata="true">
+<div class="form-group" data-biotrack="true">
 	<label>Company:</label>
 	<input autocomplete="x"
 		class="form-control company-autocomplete" name="company"
-		placeholder="Company ID, like a UBI or something - BioTrack, LeafData" value="<?= h($data['cre_company']) ?>">
+		placeholder="Company ID, like a UBI or something - BioTrack, LeafData" value="<?= h($data['company']) ?>">
 </div>
 
 <div class="form-group" data-leafdata="true" data-metrc="true">
 	<label>License:</label>
 	<input autocomplete="x"
 		class="form-control license-autocomplete" name="license"
-		placeholder="LeafData, METRC*" value="<?= h($data['cre_license']) ?>">
+		placeholder="LeafData, METRC*" value="<?= h($data['license']) ?>">
 </div>
 
 <div class="form-group" data-leafdata="true" data-metrc="true">
 	<label>License API Key:</label>
 	<input autocomplete="x"
 		class="form-control" name="license-key"
-		placeholder="LeafData, METRC" value="<?= h($data['cre_license_key']) ?>">
+		placeholder="LeafData, METRC" value="<?= h($data['license-key']) ?>">
 </div>
 
 <div class="form-group" data-biotrack="true">
 	<label>Username:</label>
 	<input autocomplete="x"
 		class="form-control" name="username"
-		placeholder="BioTrack" value="<?= h($data['cre_username']) ?>">
+		placeholder="BioTrack" value="<?= h($data['username']) ?>">
 </div>
 
 <div class="form-group" data-biotrack="true">
 	<label>Password:</label>
 	<input autocomplete="x"
 		class="form-control" name="password"
-		placeholder="BioTrack" value="<?= h($data['cre_password']) ?>">
+		placeholder="BioTrack" value="<?= h($data['password']) ?>">
 </div>
 <?php
 if (!empty($data['google_recaptcha_v2'])) {
