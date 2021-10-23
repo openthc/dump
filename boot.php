@@ -4,7 +4,7 @@
  * This file is part of OpenTHC API released under MIT License
  * SPDX-License-Identifier: GPL-3.0-only
  *
- * Bootstrap dump.openthc.com
+ * Bootstrap dump.openthc
  */
 
 use Edoceo\Radix\DB\SQL;
