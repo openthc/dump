@@ -157,7 +157,7 @@ class Open extends \OpenTHC\Controller\Auth\oAuth2
 			), 403);
 		}
 
-		$_SESSION['sql-hash'] = md5(sprintf('%s:%s', $_ENV['license'], $_ENV['license-key']));
+		$_SESSION['sql-hash'] = md5(sprintf('%s:%s', $_SESSION['cre-auth']['license'], $_SESSION['cre-auth']['license-key']));
 		$_SESSION['sql-file'] = sprintf('%s/var/%s.sqlite', APP_ROOT, $_SESSION['sql-hash']);
 
 		return $RES->withJSON([

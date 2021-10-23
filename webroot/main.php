@@ -35,8 +35,7 @@ $app->group('/auth', function() {
 })->add('OpenTHC\Middleware\Session');
 
 $app->get('/home', 'App\Controller\Home')->add('OpenTHC\Middleware\Session');
-//$app->get('/data', 'App\Controller\Data')->add('OpenTHC\Middleware\Session');
-//$app->get('/ajax', 'App\Controller\Ajax')->add('OpenTHC\Middleware\Session');
+$app->map([ 'GET', 'POST' ], '/ajax', 'App\Controller\Ajax')->add('OpenTHC\Middleware\Session');
 
 
 $app->run();

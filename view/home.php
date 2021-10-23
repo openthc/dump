@@ -12,7 +12,7 @@ function _draw_object_button($obj)
 	<button class="btn btn-primary btn-download" id="exec-pull-<?= $obj ?>" type="button" value="<?= $obj ?>" title="Queue Download"><i class="fas fa-sync"></i> Fetch</button>
 	<div class="btn-group">
 	  <button class="btn btn-outline-secondary" disabled id="exec-download-<?= $obj ?>" name="a" type="submit" value="download-<?= $obj ?>-tsv"><i class="fas fa-download"></i> Download as TSV</button>
-	  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		<span class="caret"></span>
 		<span class="sr-only">Toggle Dropdown</span>
 	  </button>
@@ -21,9 +21,6 @@ function _draw_object_button($obj)
 		<li><a class="download-option" data-format="tsv" data-obj="<?= $obj ?>" href="#">as TSV</a></li>
 		<li><a class="download-option" data-format="csv" data-obj="<?= $obj ?>" href="#">as CSV</a></li>
 		<li><a class="download-option" data-format="json" data-obj="<?= $obj ?>" href="#">as JSON</a></li>
-		<!-- <li><a class="download-option" data-format="xml" data-obj="<?= $obj ?>" href="#">as XML</a></li> -->
-		<!-- <li role="separator" class="divider"></li> -->
-		<!-- <li><a href="#"><i class="fas fa-sync"></i> Refresh</a></li> -->
 	  </ul>
 	</div>
 <?php
@@ -38,9 +35,7 @@ function _draw_object_button($obj)
 <form action="/ajax" autocomplete="off" method="post">
 <div class="container">
 <?php
-
-$sql_file = sprintf('%s/%s.sqlite', APP_ROOT, $_SESSION['sql-hash']);
-if ( ! is_file($sql_file)) {
+if ( ! empty($_SESSION['sql-file']) && ! is_file($_SESSION['sql-file'])) {
 	echo '<div class="alert alert-warning">No Database File Yet. Execute the <strong>FULL FETCH</strong></div>';
 }
 
@@ -51,63 +46,58 @@ if ( ! is_file($sql_file)) {
 <table class="table">
 <tr>
 	<td>License Data<br><small id="note-license"></small></td>
-	<td>Vendor List, QA Labs and Third Party Transporters<br><?= $stat['license'] ?> Records</td>
+	<td>Vendor List, QA Labs and Third Party Transporters</td>
 	<td class="r"><?= _draw_object_button('license') ?></td>
 </tr>
 
 <tr>
 	<td>Plant Data<br><small id="note-plants"></small></td>
-	<td>Plants, Wet and Dry Collections (aka: Plant Derivatives)<br><?= $stat['plant'] ?> Plants / <?= $stat['plant_collect'] ?> Collections</td>
+	<td>Plants, Wet and Dry Collections (aka: Plant Derivatives)</td>
 	<td class="r"><?= _draw_object_button('plants') ?></td>
 </tr>
 
 <tr>
-	<td>Inventory Data<br><small id="note-inventory"></small></td>
+	<td>Inventory Data</td>
 	<td>Inventory, Adjustments</td>
 	<td class="r"><?= _draw_object_button('inventory') ?></td>
 </tr>
 
 <tr>
-	<td>QA Data<br><small id="note-lab_result"></small></td>
-	<td>QA Samples and Results</td>
+	<td>Lab Result Data</td>
+	<td>Lab Samples and Results</td>
 	<td class="r"><?= _draw_object_button('lab_result') ?></td>
 </tr>
 
 <tr>
-	<td>Transfer Data<br><small id="note-b2b"></small></td>
+	<td>Transfer Data</td>
 	<td>Manifests, Manifest Stops and Manifest Items</td>
 	<td class="r"><?= _draw_object_button('b2b') ?></td>
 </tr>
 
 <tr>
-	<td>Retail Data<br><small id="note-b2c"></small></td>
-	<td>All Retail Sales<br><?= $stat['b2c'] ?> Records</td>
+	<td>Retail Data</td>
+	<td>All Retail Sales</td>
 	<td class="r"><?= _draw_object_button('b2c') ?></td>
 </tr>
 
 <tr>
-	<td>Room Data<br><small id="note-rooms"></small></td>
+	<td>Section Data</td>
 	<td>The Plant and Inventory rooms</td>
 	<td class="r"><?= _draw_object_button('rooms') ?></td>
 </tr>
 
 <tr>
-	<td>Vehicle Data<br><small id="note-vehicles"></small></td>
+	<td>Vehicle Data</td>
 	<td>All Vehicles</td>
 	<td class="r"><?= _draw_object_button('vehicles') ?></td>
-</tr>
-
-<tr>
-	<td>Everything!</td>
-	<td>All Data as SQLite format.</td>
-	<td class="r"><?= _draw_object_button('sqlite') ?></td>
 </tr>
 
 </table>
 
 <div class="form-actions">
 	<button class="btn btn-primary" name="a" type="submit" value="download-all"><i class="fas fa-sync"></i> Fetch All</button>
-	<button class="btn btn-primary" name="a" type="submit" value="download-zip"><i class="fas fa-archive"></i> Download All as ZIP</button>
+	<button class="btn btn-outline-primary" name="a" type="submit" value="download-zip"><i class="fas fa-archive"></i> Download All as ZIP</button>
+	<button class="btn btn-outline-primary" name="a" type="submit" value="download-sql"><i class="fas fa-archive"></i> Download All as Sqlite</button>
 	<!-- <button class="btn btn-primary" name="a" type="submit" value="autopull-day"><i class="fas fa-history"></i> Refresh Every Day</button> -->
 </div>
 
