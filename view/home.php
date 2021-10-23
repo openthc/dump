@@ -35,7 +35,10 @@ function _draw_object_button($obj)
 <form action="/ajax" autocomplete="off" method="post">
 <div class="container">
 <?php
-if ( ! empty($_SESSION['sql-file']) && ! is_file($_SESSION['sql-file'])) {
+if ( ! empty($_SESSION['download-live'])) {
+	echo '<div class="alert alert-success">Download is running...</div>';
+	unset($_SESSION['download-live']);
+} elseif ( ! empty($_SESSION['sql-file']) && ! is_file($_SESSION['sql-file'])) {
 	echo '<div class="alert alert-warning">No Database File Yet. Execute the <strong>FULL FETCH</strong></div>';
 }
 

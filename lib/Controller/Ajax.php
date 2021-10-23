@@ -49,13 +49,16 @@ class Ajax extends \OpenTHC\Controller\Base
 				$cmd = implode(' ', $cmd);
 				$buf = shell_exec($cmd);
 
-				return $RES->withJSON([
-					'data' => [
-						'cmd' => $cmd
-						, 'out' => $buf
-					]
-					, 'meta' => []
-				]);
+				// ([
+				// 	'data' => [
+				// 		'cmd' => $cmd
+				// 		, 'out' => $buf
+				// 	]
+				// 	, 'meta' => []
+				// ]);
+				$_SESSION['download-live'] = true;
+
+				return $RES->withRedirect('/home');
 
 				break;
 
