@@ -71,6 +71,27 @@ class Ajax extends \OpenTHC\Controller\Base
 
 				exit(0);
 
+			case 'download-zip':
+
+				$sql_file = sprintf('%s/var/%s.sqlite', APP_ROOT, md5(sprintf('%s:%s', $_SESSION['cre-auth']['license'], $_SESSION['cre-auth']['license-key'])));
+				$zip_file = sprintf('%s/var/%s.zip', APP_ROOT, md5(sprintf('%s:%s', $_SESSION['cre-auth']['license'], $_SESSION['cre-auth']['license-key'])));
+
+				$cmd = implode(' ', [
+					'/usr/bin/zip',
+					'--junk-paths',
+					$zip_file,
+					$sql_file,
+				]);
+				$buf = shell_exec($cmd);
+
+				header(sprintf('content-disposition: attachment; filename="%s.zip"', $_SESSION['cre-auth']['license']));
+				header('content-length: ' . filesize($zip_file));
+				header('content-type: application/zip; charset=binary');
+
+				readfile($zip_file);
+
+				exit(0);
+
 			case 'ping':
 
 				return $RES->withJSON([
