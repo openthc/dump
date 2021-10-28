@@ -39,8 +39,12 @@ if ( ! empty($_SESSION['download-live'])) {
 	echo '<div class="alert alert-success">Download is running...</div>';
 	unset($_SESSION['download-live']);
 } elseif ( ! empty($_SESSION['sql-file']) && ! is_file($_SESSION['sql-file'])) {
-	echo '<div class="alert alert-warning">No Database File Yet. Execute the <strong>FULL FETCH</strong></div>';
+	echo '<div class="alert alert-warning">No Database File Yet. Execute <strong>FETCH ALL</strong></div>';
 }
+echo <<<HTML
+<div class="alert alert-success" id="download-live" style="display: none;">Download is ready. Choose format to <strong>Download All</strong>
+</div>
+HTML;
 
 ?>
 
@@ -115,6 +119,10 @@ function ping()
 		a: 'ping',
 	};
 	$.post('/ajax', arg, function(res, ret) {
+		if (res.data.download_live) {
+			$(".container .alert").hide();
+			$("#download-live").show();
+		}
 		// _.forOwn(res.result, function(val, key) {
 		// 	$('#note-' + key).html('Updated: ' + val.time);
 		// 	$('#exec-pull-' + key).html('<i class="fas fa-sync"></i> Fetch');

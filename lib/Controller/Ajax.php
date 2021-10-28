@@ -94,8 +94,18 @@ class Ajax extends \OpenTHC\Controller\Base
 
 			case 'ping':
 
+				$download_live = false;
+				$log_file = sprintf("%s/var/%s.log", APP_ROOT, $_SESSION['cre-auth']['license']);
+				$cmd = sprintf('/usr/bin/tac %s | /usr/bin/head -n1', $log_file);
+				$buf = shell_exec($cmd);
+				if (preg_match('/^DONE: \w+/', $buf)) {
+					$download_live = true;
+				}
+
 				return $RES->withJSON([
-					'data' => []
+					'data' => [
+						'download_live' => $download_live,
+					]
 					, 'meta' => []
 				]);
 
